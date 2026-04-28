@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockholm Welcome Guide</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇸🇪 Stockholm Welcome Guide</h1>
+            <p>Your personal assistant after landing at Arlanda Airport</p>
+            <p class="time">Current time: {{ current_time }}</p>
+        </header>
+
+        <section class="section weather-section">
+            <h2>Weather in Stockholm</h2>
+            <p><strong>{{ weather.temperature }}</strong> — {{ weather.condition }}</p>
+            <p class="advice">{{ weather.advice }}</p>
+        </section>
+
+        <section class="section">
+            <h2>Real-time Arrivals at Arlanda (ARN)</h2>
+            
+            <div class="flights-grid">
+                {% for flight in arrivals %}
+                <div class="flight-card">
+                    <h3>{{ flight.flightNumber }}</h3>
+                    <p><strong>{{ flight.airline }}</strong></p>
+                    <p><strong>From:</strong> {{ flight.origin }}</p>
+                    <p><strong>Scheduled:</strong> {{ flight.scheduledTime }}</p>
+                    <p><strong>Estimated:</strong> {{ flight.estimatedTime }}</p>
+                    <p><strong>Status:</strong> <span class="status">{{ flight.status }}</span></p>
+                    <p><strong>Gate:</strong> {{ flight.gate }} | Terminal: {{ flight.terminal }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>How to Get to Stockholm City Center</h2>
+            <div class="transport-options">
+                <div class="option">
+                    <strong>🚄 Arlanda Express</strong><br>
+                    Fastest option • 18 minutes • ~280 SEK
+                </div>
+                <div class="option">
+                    <strong>🚌 Flygbussarna</strong><br>
+                    Cheaper • 40-45 minutes • ~169 SEK
+                </div>
+                <div class="option">
+                    <strong>🚇 SL Public Transport</strong><br>
+                    Good value with SL card • ~40 minutes
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
